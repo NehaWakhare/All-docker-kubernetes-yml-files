@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: <YOUR-NAMESPACE>
+spec:
+  replicas: <REPLICA-COUNT>
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: <YOUR-BACKEND-IMAGE>
+        imagePullPolicy: Always
+        ports:
+        - containerPort: <BACKEND-PORT>
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://db-service:<DB-PORT>/<DB-NAME>"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db-root-password
