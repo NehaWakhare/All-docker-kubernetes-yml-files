@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: <APP-NAME>-pv
+spec:
+  capacity:
+    storage: <SIZE>Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/<APP-NAME>"
+  storageClassName: manual
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: <APP-NAME>-pvc
+  namespace: <YOUR-NAMESPACE>
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: <SIZE>Gi
+  storageClassName: manual
