@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: <YOUR-NAMESPACE>
+data:
+  DB_HOST: "db-service"
+  DB_PORT: "<DB-PORT>"
+  DB_NAME: "<DB-NAME>"
+  APP_ENV: "production"
+  APP_PORT: "<BACKEND-PORT>"
+  BACKEND_URL: "http://backend-service:<BACKEND-PORT>"
